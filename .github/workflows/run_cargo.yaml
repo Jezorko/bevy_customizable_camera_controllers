@@ -16,6 +16,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Install alsa (needed for alsa-sys crate)
+        run: sudo apt-get install alsa libasound2-dev libudev-dev
       - name: Checkout code
         uses: actions/checkout@v4
       - name: Run ${{ inputs.cargo-command }}
