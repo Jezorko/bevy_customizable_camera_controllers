@@ -1,5 +1,5 @@
 use crate::fov::{change_camera_fov_on, reset_fov};
-use crate::movement::move_camera_on;
+use crate::movement::move_camera_on_keys;
 use crate::rotation::rotate_camera_on;
 use bevy::input::mouse::{AccumulatedMouseMotion, AccumulatedMouseScroll};
 use bevy::prelude::*;
@@ -17,22 +17,14 @@ impl Plugin for FreecamControllerPlugin {
         app.add_systems(Startup, reset_fov).add_systems(
             Update,
             (
-                move_camera_on::<ButtonInput<KeyCode>>(|input, time, current_transform| {
-                    [
-                        (KeyCode::KeyW, current_transform.forward()),
-                        (KeyCode::KeyS, current_transform.back()),
-                        (KeyCode::KeyA, current_transform.left()),
-                        (KeyCode::KeyD, current_transform.right()),
-                        (KeyCode::Space, current_transform.up()),
-                        (KeyCode::ShiftLeft, current_transform.down()),
-                    ]
-                    .into_iter()
-                    .filter(|(key, _)| input.pressed(*key))
-                    .map(|(_, direction)| direction)
-                    .map(|direction| direction.as_vec3())
-                    .sum::<Vec3>()
-                        * time.delta_secs()
-                }),
+                move_camera_on_keys(vec![
+                    (KeyCode::KeyW, Transform::forward),
+                    (KeyCode::KeyS, Transform::back),
+                    (KeyCode::KeyA, Transform::left),
+                    (KeyCode::KeyD, Transform::right),
+                    (KeyCode::Space, Transform::up),
+                    (KeyCode::ShiftLeft, Transform::down),
+                ]),
                 rotate_camera_on::<AccumulatedMouseMotion>(|input, time| {
                     input.delta * time.delta_secs()
                 }),

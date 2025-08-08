@@ -1,4 +1,4 @@
-name: Build & Test
+name: Run all tests
 
 on:
   push:
@@ -7,11 +7,6 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build-release:
-    name: Build the release executable
-    uses: ./.github/workflows/run_cargo.yaml
-    with:
-      cargo-command: cargo build --release
   run-tests:
     name: Run all tests
     uses: ./.github/workflows/run_cargo.yaml

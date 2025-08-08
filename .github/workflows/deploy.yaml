@@ -2,10 +2,9 @@ name: Deploy to crates.io
 
 on:
   workflow_run:
-    workflows: ["Build & Test"]
-    branches: [ "main" ]
-    types:
-      - completed
+    workflows: [Run all tests]
+    branches: [main]
+    types: [completed]
 
 jobs:
   deploy:
