@@ -2,7 +2,7 @@
 [![Crates.io](https://img.shields.io/crates/v/bevy_customizable_camera_controllers)](https://crates.io/crates/bevy_customizable_camera_controllers)
 [![Downloads](https://img.shields.io/crates/d/bevy_customizable_camera_controllers.svg)](https://crates.io/crates/bevy_customizable_camera_controllers)
 [![Docs](https://docs.rs/bevy_customizable_camera_controllers/badge.svg)](https://docs.rs/bevy_customizable_camera_controllers)
-[![Tests](https://github.com/Jezorko/bevy_customizable_camera_controllers/actions/workflows/test.yaml/badge.svg)](https://github.com/Jezorko/bevy_customizable_camera_controllers/actions/workflows/test.yaml)
+[![Tests](https://github.com/Jezorko/bevy_customizable_camera_controllers/actions/workflows/tests.yaml/badge.svg)](https://github.com/Jezorko/bevy_customizable_camera_controllers/actions/workflows/tests.yaml)
 
 ## Version Compatibility
 
