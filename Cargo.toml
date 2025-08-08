@@ -1,0 +1,15 @@
+[package]
+name = "bevy_customizable_camera_controllers"
+description = "Customizable camera controllers for Bevy"
+version = "0.1.1"
+edition = "2024"
+repository = "https://github.com/Jezorko/bevy_customizable_camera_controllers"
+readme = "README.md"
+homepage = "https://github.com/Jezorko/bevy_customizable_camera_controllers/blob/main/README.md"
+keywords = ["gamedev", "bevy", "camera", "freecam"]
+categories = ["game-development", "rendering"]
+exclude = [".github", ".idea"]
+license = "MIT OR Apache-2.0"
+
+[dependencies.bevy]
+version = "0.16.1"

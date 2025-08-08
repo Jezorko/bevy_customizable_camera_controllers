@@ -1,0 +1,19 @@
+name: Build & Test
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build-release:
+    name: Build the release executable
+    uses: ./.github/workflows/run_cargo.yaml
+    with:
+      cargo-command: cargo build --release
+  run-tests:
+    name: Run all tests
+    uses: ./.github/workflows/run_cargo.yaml
+    with:
+      cargo-command: cargo test --verbose

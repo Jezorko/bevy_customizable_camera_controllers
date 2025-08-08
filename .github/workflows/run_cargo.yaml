@@ -1,0 +1,22 @@
+name: Reusable workflow to prepare environment and run a cargo command
+
+on:
+  workflow_call:
+    inputs:
+      cargo-command:
+        required: true
+        type: string
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Run ${{ inputs.cargo-command }}
+        run: ${{ inputs.cargo-command }}

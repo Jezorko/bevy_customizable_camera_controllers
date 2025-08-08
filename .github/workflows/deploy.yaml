@@ -1,0 +1,16 @@
+name: Deploy to crates.io
+
+on:
+  workflow_run:
+    workflows: ["Build & Test"]
+    branches: [ "main" ]
+    types:
+      - completed
+
+jobs:
+  deploy:
+    name: Publish new crate version
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    uses: ./.github/workflows/run_cargo.yaml
+    with:
+      cargo-command: cargo publish
