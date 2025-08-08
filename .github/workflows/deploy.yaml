@@ -1,8 +1,8 @@
-name: Deploy to crates.io
+name: Deploy
 
 on:
   workflow_run:
-    workflows: [Run all tests]
+    workflows: [Tests]
     branches: [main]
     types: [completed]
 
