@@ -6,6 +6,9 @@ on:
     branches: [main]
     types: [completed]
 
+env:
+  CARGO_REGISTRY_TOKEN: ${{ secrets.CARGO_REGISTRY_TOKEN }}
+
 jobs:
   deploy:
     name: Publish new crate version
