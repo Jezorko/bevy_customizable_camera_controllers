@@ -1,8 +1,6 @@
 name: Tests
 
 on:
-  push:
-    branches: [ main ]
   pull_request:
     branches: [ main ]
 
@@ -12,3 +10,5 @@ jobs:
     uses: ./.github/workflows/run_cargo.yaml
     with:
       cargo-command: cargo test --verbose
+      clean-compile: true
+      upload-compilation-result: false

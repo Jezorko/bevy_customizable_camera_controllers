@@ -1,15 +1,18 @@
 name: Deployment
 
 on:
-  workflow_run:
-    workflows: [ Tests ]
+  push:
     branches: [ main ]
-    types: [ completed ]
 
 jobs:
+  run-tests:
+    name: Run all tests
+    uses: ./.github/workflows/run_cargo.yaml
+    with:
+      cargo-command: cargo test --verbose
   deploy:
     name: Publish new crate version
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    needs: run-tests
     uses: ./.github/workflows/run_cargo.yaml
     with:
       cargo-command: cargo publish
