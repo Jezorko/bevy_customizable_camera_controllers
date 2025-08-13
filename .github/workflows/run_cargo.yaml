@@ -6,10 +6,6 @@ on:
       cargo-command:
         required: true
         type: string
-      clean-compile:
-        required: false
-        type: boolean
-        default: false
     secrets:
       cargo-registry-token:
         required: false
@@ -19,18 +15,6 @@ jobs:
     name: ${{ inputs.cargo-command }}
     runs-on: ubuntu-latest
     steps:
-      - name: Check if compiled sources can be downloaded
-        if: ${{ inputs.clean-compile == 'false' }}
-        uses: softwareforgood/check-artifact-v4-existence@v0
-        id: check-compilation-result-exists
-        with:
-          name: compilation-result-${{ github.head_ref }}
-      - name: Download compiled sources
-        if: ${{ steps.check-compilation-result-exists.outputs.exists == 'true' }}
-        uses: actions/download-artifact@v4
-        with:
-          name: compilation-result-${{ github.head_ref }}
-          path: target
       - name: Install alsa (needed for alsa-sys crate)
         run: sudo apt-get install alsa libasound2-dev libudev-dev
       - name: Checkout code
@@ -40,8 +24,3 @@ jobs:
         env:
           CARGO_REGISTRY_TOKEN: ${{ secrets.cargo-registry-token }}
           CARGO_TERM_COLOR: always
-      - name: Upload compiled sources
-        uses: actions/upload-artifact@v4
-        with:
-          name: compilation-result-${{ github.head_ref }}
-          path: target
