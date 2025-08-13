@@ -14,7 +14,6 @@ jobs:
   run-cargo:
     name: ${{ inputs.cargo-command }}
     runs-on: ubuntu-latest
-    environment: Rust Crates
     steps:
       - name: Install alsa (needed for alsa-sys crate)
         run: sudo apt-get install alsa libasound2-dev libudev-dev
