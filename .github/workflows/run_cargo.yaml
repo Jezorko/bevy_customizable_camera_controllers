@@ -24,12 +24,12 @@ jobs:
         uses: softwareforgood/check-artifact-v4-existence@v0
         id: check-compilation-result-exists
         with:
-          name: compilation-result-${{ github.head_ref }}
+          name: compilation-result-${{ github.sha }}
       - name: Download compiled sources
         if: ${{ steps.check-compilation-result-exists.outputs.exists == true }}
         uses: actions/download-artifact@v4
         with:
-          name: compilation-result-${{ github.head_ref }}
+          name: compilation-result-${{ github.sha }}
           path: target
       - name: Install alsa (needed for alsa-sys crate)
         run: sudo apt-get install alsa libasound2-dev libudev-dev
@@ -44,5 +44,5 @@ jobs:
         if: ${{ steps.check-compilation-result-exists.outputs.exists == false }}
         uses: actions/upload-artifact@v4
         with:
-          name: compilation-result-${{ github.head_ref }}
+          name: compilation-result-${{ github.sha }}
           path: target
