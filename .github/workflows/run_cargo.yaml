@@ -6,14 +6,6 @@ on:
       cargo-command:
         required: true
         type: string
-      clean-compile:
-        required: false
-        type: boolean
-        default: false
-      upload-compilation-result:
-        required: false
-        type: boolean
-        default: true
     secrets:
       cargo-registry-token:
         required: false
@@ -23,18 +15,6 @@ jobs:
     name: ${{ inputs.cargo-command }}
     runs-on: ubuntu-latest
     steps:
-      - name: Check if compiled sources can be downloaded
-        if: ${{ inputs.clean-compile == false }}
-        uses: softwareforgood/check-artifact-v4-existence@v0
-        id: check-compilation-result-exists
-        with:
-          name: compilation-result-${{ github.sha }}
-      - name: Download compiled sources
-        if: ${{ inputs.clean-compile == false && steps.check-compilation-result-exists.outputs.exists == 'true' }}
-        uses: actions/download-artifact@v4
-        with:
-          name: compilation-result-${{ github.sha }}
-          path: target
       - name: Install alsa (needed for alsa-sys crate)
         run: sudo apt-get install alsa libasound2-dev libudev-dev
       - name: Checkout code
@@ -44,13 +24,3 @@ jobs:
         env:
           CARGO_REGISTRY_TOKEN: ${{ secrets.cargo-registry-token }}
           CARGO_TERM_COLOR: always
-      - uses: geekyeggo/delete-artifact@v5
-        if: ${{ steps.check-compilation-result-exists.outputs.exists == 'true' && inputs.clean-compile == true && inputs.upload-compilation-result == true }}
-        with:
-          name: compilation-result-${{ github.sha }}
-      - name: Upload compiled sources
-        if: ${{ inputs.upload-compilation-result == true && (inputs.clean-compile == true || steps.check-compilation-result-exists.outputs.exists == 'false') }}
-        uses: actions/upload-artifact@v4
-        with:
-          name: compilation-result-${{ github.sha }}
-          path: target

@@ -5,17 +5,10 @@ on:
     branches: [ main ]
 
 jobs:
-  run-tests:
-    name: Run all tests
-    uses: ./.github/workflows/run_cargo.yaml
-    with:
-      cargo-command: cargo test --verbose
-      clean-compile: true
-  deploy:
+  run-tests-and-deploy:
     name: Publish new crate version
-    needs: run-tests
     uses: ./.github/workflows/run_cargo.yaml
     with:
-      cargo-command: cargo publish
+      cargo-command: cargo test --verbose && cargo publish
     secrets:
       cargo-registry-token: ${{ secrets.CARGO_REGISTRY_TOKEN }}
