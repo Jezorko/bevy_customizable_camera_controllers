@@ -10,6 +10,7 @@ jobs:
     uses: ./.github/workflows/run_cargo.yaml
     with:
       cargo-command: cargo test --verbose
+      clean-compile: true
   deploy:
     name: Publish new crate version
     needs: run-tests
