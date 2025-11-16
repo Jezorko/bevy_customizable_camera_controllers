@@ -2,7 +2,7 @@
 mod scene;
 
 use bevy::prelude::*;
-use bevy::window::CursorGrabMode;
+use bevy::window::{CursorGrabMode, CursorOptions, PrimaryWindow};
 use bevy_customizable_camera_controllers::fov::CameraFovController;
 use bevy_customizable_camera_controllers::freecam::FreecamControllerPlugin;
 use bevy_customizable_camera_controllers::movement::CameraMovementController;
@@ -17,9 +17,9 @@ fn main() {
         .run();
 }
 
-fn setup_cursor_capture(mut window: Single<&mut Window>) {
-    window.cursor_options.visible = false;
-    window.cursor_options.grab_mode = CursorGrabMode::Locked;
+fn setup_cursor_capture(mut primary_cursor_options: Single<&mut CursorOptions, With<PrimaryWindow>>) {
+    primary_cursor_options.visible = false;
+    primary_cursor_options.grab_mode = CursorGrabMode::Locked;
 }
 
 fn spawn_camera(mut commands: Commands) {
