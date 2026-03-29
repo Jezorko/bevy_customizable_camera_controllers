@@ -2,9 +2,9 @@ name: Deployment
 
 on:
   workflow_run:
-    workflows: [Tests]
-    branches: [main]
-    types: [completed]
+    workflows: [ Tests ]
+    branches: [ v0.2.x ]
+    types: [ completed ]
 
 jobs:
   run-tests-and-deploy:
