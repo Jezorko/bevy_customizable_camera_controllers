@@ -15,6 +15,8 @@ jobs:
     name: ${{ inputs.cargo-command }}
     runs-on: ubuntu-latest
     steps:
+      - name: Update system
+        run: sudo apt-get -y update
       - name: Install wayland-client library
         run: sudo apt install libwayland-dev
       - name: Install alsa (needed for alsa-sys crate)
