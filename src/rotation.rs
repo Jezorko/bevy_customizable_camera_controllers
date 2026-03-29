@@ -31,7 +31,7 @@ pub fn rotate_camera_on<Input: Resource>(
             transform.rotate_local_x(rotational_delta.y);
 
             if controller.force_y_up_direction {
-                let y_forward_plane_normal = transform.forward().cross(Vec3::Y).normalize();
+                let y_forward_plane_normal = transform.forward().normalize().cross(Vec3::Y);
 
                 let rejection = transform
                     .up()
