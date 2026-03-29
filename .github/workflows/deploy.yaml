@@ -3,7 +3,9 @@ name: Deployment
 on:
   workflow_run:
     workflows: [Tests]
-    branches: [main]
+    branches:
+      - 'main'
+      - 'v*.*.*'
     types: [completed]
 
 jobs:
